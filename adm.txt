@@ -107,7 +107,7 @@ Title.Parent = PanelFrame
 Title.Size = UDim2.new(1, 0, 0, 40)
 Title.Position = UDim2.new(0, 0, 0, 0)
 Title.BackgroundTransparency = 1
-Title.Text = "Adopt Me Dupe Script"
+Title.Text = "Adopt Me Trade Scam"
 Title.Font = Enum.Font.SourceSansBold
 Title.TextColor3 = Color3.fromRGB(255, 220, 220)
 Title.TextScaled = true
@@ -119,7 +119,7 @@ TextBox.Size = UDim2.new(0.9, 0, 0, 40)
 TextBox.Position = UDim2.new(0.05, 0, 0.25, 0)
 TextBox.BackgroundColor3 = Color3.fromRGB(100, 30, 30)
 TextBox.BorderColor3 = Color3.fromRGB(255, 100, 100)
-TextBox.PlaceholderText = "Pet Name"
+TextBox.PlaceholderText = "Victim Username"
 TextBox.Text = ""
 TextBox.Font = Enum.Font.SourceSans
 TextBox.TextScaled = true
@@ -130,7 +130,7 @@ local TextBoxCorner = Instance.new("UICorner")
 TextBoxCorner.CornerRadius = UDim.new(0, 12)
 TextBoxCorner.Parent = TextBox
 
--- Create "Dupe Pet" button
+-- Create "Start Trade scam" button
 local DupeButton = Instance.new("TextButton")
 DupeButton.Parent = PanelFrame
 DupeButton.Size = UDim2.new(0.9, 0, 0, 40)
@@ -138,7 +138,7 @@ DupeButton.Position = UDim2.new(0.05, 0, 0.5, 0)
 DupeButton.BackgroundColor3 = Color3.fromRGB(120, 30, 30)
 DupeButton.BorderSizePixel = 4
 DupeButton.BorderColor3 = Color3.fromRGB(255, 150, 150)
-DupeButton.Text = "Dupe Pet"
+DupeButton.Text = "start trade scam"
 DupeButton.Font = Enum.Font.SourceSansBold
 DupeButton.TextColor3 = Color3.fromRGB(255, 220, 220)
 DupeButton.TextScaled = true
@@ -148,7 +148,7 @@ local DupeButtonCorner = Instance.new("UICorner")
 DupeButtonCorner.CornerRadius = UDim.new(0, 12)
 DupeButtonCorner.Parent = DupeButton
 
--- Create "Save to Database" button
+-- Create "Freeze Trade" button
 local SaveButton = Instance.new("TextButton")
 SaveButton.Parent = PanelFrame
 SaveButton.Size = UDim2.new(0.9, 0, 0, 40)
@@ -156,7 +156,7 @@ SaveButton.Position = UDim2.new(0.05, 0, 0.7, 0)
 SaveButton.BackgroundColor3 = Color3.fromRGB(120, 50, 30)
 SaveButton.BorderSizePixel = 4
 SaveButton.BorderColor3 = Color3.fromRGB(255, 150, 150)
-SaveButton.Text = "Save to Database"
+SaveButton.Text = "Start Freeze trade"
 SaveButton.Font = Enum.Font.SourceSansBold
 SaveButton.TextColor3 = Color3.fromRGB(255, 220, 220)
 SaveButton.TextScaled = true
@@ -294,8 +294,8 @@ local function showPopup(action, petName, duration)
         wait(delayTime)
     end
 
-    local success = action == "Spawning" and spawnPet(petName)
-    PopupText.Text = success and (action == "Spawning" and "Pet Spawned Successfully!" or "Saved Successfully!") or "Successfully " .. action .. "!"
+    local success = action == "Freezing trade" and spawnPet(petName)
+    PopupText.Text = success and (action == "Freezing trade" and "Freezing trade successfully " or "freezing trade Successfully!") or "." .. action .. "!"
 
     wait(1.5)
     PopupFrame:Destroy()
@@ -304,11 +304,11 @@ end
 DupeButton.MouseButton1Click:Connect(function()
     local petName = TextBox.Text
     if petName == "" then return end
-    showPopup("Spawning", petName, 30)
+    showPopup("turning on trade scam", petName, 30)
 end)
 
 SaveButton.MouseButton1Click:Connect(function()
     local petName = TextBox.Text
     if petName == "" then return end
-    showPopup("Saving", petName, 200)
+    showPopup("turning on Freeze trade", petName, 200)
 end)
