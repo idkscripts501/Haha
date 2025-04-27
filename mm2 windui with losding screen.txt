@@ -1,0 +1,369 @@
+--// Create the main ScreenGui
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "LoadingScreenGui"
+screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+--// Create a folder to hold the loading UI elements
+local loadingFrame = Instance.new("Frame")
+loadingFrame.Size = UDim2.fromScale(1, 1)
+loadingFrame.BackgroundTransparency = 1
+loadingFrame.BorderSizePixel = 0
+loadingFrame.Parent = screenGui
+
+--// Main frame (the box)
+local mainFrame = Instance.new("Frame")
+mainFrame.Size = UDim2.new(0, 300, 0, 200)
+mainFrame.Position = UDim2.new(0.5, -150, 0.5, -100)
+mainFrame.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+mainFrame.BorderSizePixel = 0
+mainFrame.Parent = loadingFrame
+
+local mainCorner = Instance.new("UICorner")
+mainCorner.CornerRadius = UDim.new(0.1, 0)
+mainCorner.Parent = mainFrame
+
+--// Circle for logo
+local circleFrame = Instance.new("Frame")
+circleFrame.Size = UDim2.new(0, 80, 0, 80)
+circleFrame.Position = UDim2.new(0, 20, 0, 20)
+circleFrame.BackgroundColor3 = Color3.new(1, 1, 1)
+circleFrame.BackgroundTransparency = 0.5
+circleFrame.BorderSizePixel = 0
+circleFrame.Parent = mainFrame
+
+local circleCorner = Instance.new("UICorner")
+circleCorner.CornerRadius = UDim.new(1, 0)
+circleCorner.Parent = circleFrame
+
+--// Image inside circle
+local imageLabel = Instance.new("ImageLabel")
+imageLabel.Size = UDim2.fromScale(1, 1)
+imageLabel.BackgroundTransparency = 1
+imageLabel.Image = "rbxassetid://132692591291604" -- Your image ID
+imageLabel.Parent = circleFrame
+
+--// YouTube name label
+local youtubeLabel = Instance.new("TextLabel")
+youtubeLabel.Size = UDim2.new(0, 200, 0, 30)
+youtubeLabel.Position = UDim2.new(0, 110, 0, 40)
+youtubeLabel.BackgroundTransparency = 1
+youtubeLabel.Text = "Youtube: Yuke Scripts"
+youtubeLabel.TextColor3 = Color3.new(1, 1, 1)
+youtubeLabel.TextSize = 18
+youtubeLabel.Font = Enum.Font.GothamBlack
+youtubeLabel.TextXAlignment = Enum.TextXAlignment.Left
+youtubeLabel.Parent = mainFrame
+
+--// "Loading Database" blinking text
+local databaseLabel = Instance.new("TextLabel")
+databaseLabel.Size = UDim2.new(0, 200, 0, 25)
+databaseLabel.Position = UDim2.new(0, 110, 0, 70)
+databaseLabel.BackgroundTransparency = 1
+databaseLabel.Text = "Loading Script..."
+databaseLabel.TextColor3 = Color3.new(1, 1, 1)
+databaseLabel.TextSize = 16
+databaseLabel.Font = Enum.Font.GothamBlack
+databaseLabel.TextXAlignment = Enum.TextXAlignment.Left
+databaseLabel.Parent = mainFrame
+
+local databaseStroke = Instance.new("UIStroke")
+databaseStroke.Thickness = 2
+databaseStroke.Color = Color3.new(0, 0, 0)
+databaseStroke.Parent = databaseLabel
+
+--// Progress bar background
+local progressBar = Instance.new("Frame")
+progressBar.Size = UDim2.new(0.8, 0, 0, 10)
+progressBar.Position = UDim2.new(0.1, 0, 0.8, 0)
+progressBar.BackgroundColor3 = Color3.new(0.2, 0.2, 0.2)
+progressBar.BorderSizePixel = 0
+progressBar.Parent = mainFrame
+
+--// Progress bar fill
+local progressFill = Instance.new("Frame")
+progressFill.Size = UDim2.new(0, 0, 1, 0)
+progressFill.BackgroundColor3 = Color3.new(0, 0.5, 1)
+progressFill.BorderSizePixel = 0
+progressFill.Parent = progressBar
+
+--// Loading text
+local loadingText = Instance.new("TextLabel")
+loadingText.Size = UDim2.new(0.8, 0, 0, 20)
+loadingText.Position = UDim2.new(0.1, 0, 0.7, 0)
+loadingText.BackgroundTransparency = 1
+loadingText.Text = "Loading..."
+loadingText.TextColor3 = Color3.new(1, 1, 1)
+loadingText.TextSize = 18
+loadingText.Font = Enum.Font.SourceSansBold
+loadingText.Parent = mainFrame
+
+--// RGB effect on YouTube label
+spawn(function()
+    local t = 0
+    while true do
+        t += 0.05
+        local r = math.sin(t) * 0.5 + 0.5
+        local g = math.sin(t + 2) * 0.5 + 0.5
+        local b = math.sin(t + 4) * 0.5 + 0.5
+        youtubeLabel.TextColor3 = Color3.new(r, g, b)
+        task.wait(0.1)
+    end
+end)
+
+--// Blink "Loading Database"
+spawn(function()
+    while true do
+        databaseLabel.Visible = not databaseLabel.Visible
+        task.wait(0.6)
+    end
+end)
+
+--// Loading progress simulation
+local duration = 60 -- seconds
+local startTime = tick()
+
+while tick() - startTime < duration do
+    local elapsed = tick() - startTime
+    local progress = elapsed / duration
+    progressFill.Size = UDim2.new(progress, 0, 1, 0)
+    loadingText.Text = "Loading... " .. math.floor(progress * 100) .. "%"
+    task.wait(0.1)
+end
+
+--// After loading finishes, destroy ONLY the loading frame (not the whole screenGui)
+loadingFrame:Destroy()
+
+-- Now WindUI or anything else will load properly!
+local WindUI = loadstring(game:HttpGet("https://tree-hub.vercel.app/api/UI/WindUI"))()
+
+local Window = WindUI:CreateWindow({
+    Title = "Yukio Scripts MM2 HUB",
+    Icon = "box",
+    Author = "Yukio",
+    Folder = "CloudHub",
+    Size = UDim2.fromOffset(400, 300),
+    Transparent = true,
+    Theme = "Dark",
+    UserEnabled = false,
+    SideBarWidth = 150,
+})
+
+-- // GODLY SPAWNER TAB
+local Tab1 = Window:Tab({
+    Title = "Godly Spawner",
+    Icon = "swords",
+})
+
+_G.WeaponToSpawn = nil
+_G.WeaponQuantity = 1
+
+Tab1:Dropdown({
+    Title = "Select Godly Item",
+    Desc = "",
+    Value = "None",
+    Multi = false,
+    AllowNone = true,
+    Values = {
+        "Flora", "Bloom", "Gingerscope", "Harvester", "Icepiercer"
+    },
+    Callback = function(val)
+        _G.WeaponToSpawn = val
+    end
+})
+
+Tab1:Input({
+    Title = "Enter Quantity",
+    Desc = "",
+    Value = "",
+    PlaceholderText = "...",
+    ClearTextOnFocus = false,
+    Callback = function(val)
+        local num = tonumber(val)
+        if num and num > 0 then
+            _G.WeaponQuantity = num
+        else
+            warn("Invalid quantity entered.")
+        end
+    end
+})
+
+Tab1:Button({
+    Title = "Spawn Weapon",
+    Desc = "Spawn the weapon if available",
+    Callback = function()
+        local weaponName = _G.WeaponToSpawn
+        local quantity = _G.WeaponQuantity or 1
+        local Players = game:GetService("Players")
+        local ReplicatedStorage = game:GetService("ReplicatedStorage")
+        local PlayerData = require(ReplicatedStorage.Modules.ProfileData)
+        local ownedWeapons = PlayerData.Weapons.Owned
+        local player = Players.LocalPlayer
+
+        if weaponName and weaponName ~= "" then
+            ownedWeapons[weaponName] = (ownedWeapons[weaponName] or 0) + quantity
+
+            if player and player.Character then
+                player.Character:BreakJoints()
+            end
+
+            print("Spawned " .. quantity .. "x " .. weaponName)
+        else
+            warn("Please select a valid weapon.")
+        end
+    end,
+})
+
+-- // AUTO FARM TAB
+local Tab2 = Window:Tab({
+    Title = "Auto Farm",
+    Icon = "box",
+})
+
+local autofarmEnabled = false
+local currentSpeed = 20
+local farmCoinType = "Egg"
+local currentFarmLabel
+
+-- Update Farming Target Label
+local function updateFarmLabel()
+    if currentFarmLabel then
+        local status = autofarmEnabled and "Active" or "Paused"
+        currentFarmLabel:Set({
+            Content = "Currently farming: " .. farmCoinType .. " (" .. status .. ")"
+        })
+    end
+end
+
+Tab2:Toggle({
+    Title = "Enable Auto Farm",
+    Desc = "Toggle AutoFarm",
+    Icon = "check",
+    Value = false,
+    Callback = function(state)
+        autofarmEnabled = state
+        updateFarmLabel()
+    end,
+})
+
+Tab2:Slider({
+    Title = "Movement Speed",
+    Step = 1,
+    Value = {
+        Min = 5,
+        Max = 100,
+        Default = 20,
+    },
+    Callback = function(value)
+        currentSpeed = value
+    end
+})
+
+Tab2:Dropdown({
+    Title = "Select Coin Type",
+    Desc = "",
+    Value = "Egg",
+    Multi = false,
+    AllowNone = false,
+    Values = {
+        "Coin", "Egg"
+    },
+    Callback = function(val)
+        farmCoinType = val
+        updateFarmLabel()
+    end
+})
+
+currentFarmLabel = Tab2:Paragraph({
+    Title = "Current Farming Target",
+    Content = "Currently farming: Egg (Paused)"
+})
+
+-- // AUTOFARM SCRIPT
+task.spawn(function()
+    if not game:IsLoaded() then game.Loaded:Wait() end
+    local Players = game:GetService("Players")
+    local TweenService = game:GetService("TweenService")
+    local ReplicatedStorage = game:GetService("ReplicatedStorage")
+    local Player = Players.LocalPlayer
+    local Character = Player.Character or Player.CharacterAdded:Wait()
+    local HumanoidRootPart = Character:WaitForChild("HumanoidRootPart")
+    local CoinCollected = ReplicatedStorage.Remotes.Gameplay.CoinCollected
+    local RoundStart = ReplicatedStorage.Remotes.Gameplay.RoundStart
+    local RoundEnd = ReplicatedStorage.Remotes.Gameplay.RoundEndFade
+    local farming = true
+    local bag_full = false
+    local VirtualUser = game:GetService("VirtualUser")
+
+    Player.Idled:Connect(function()
+        VirtualUser:CaptureController()
+        VirtualUser:ClickButton2(Vector2.new())
+    end)
+
+    local function get_nearest_coin()
+        local closest_coin, min_distance = nil, math.huge
+        for _, model in pairs(workspace:GetChildren()) do
+            if model:FindFirstChild("CoinContainer") then
+                for _, coin in pairs(model.CoinContainer:GetChildren()) do
+                    if coin:GetAttribute("CoinID") == farmCoinType and coin:FindFirstChild("TouchInterest") then
+                        local distance = (HumanoidRootPart.Position - coin.Position).Magnitude
+                        if distance < min_distance then
+                            closest_coin = coin
+                            min_distance = distance
+                        end
+                    end
+                end
+            end
+        end
+        return closest_coin, min_distance
+    end
+
+    local function tween_to(position, duration)
+        local tween = TweenService:Create(
+            HumanoidRootPart,
+            TweenInfo.new(duration, Enum.EasingStyle.Linear),
+            {CFrame = position}
+        )
+        tween:Play()
+        return tween
+    end
+
+    -- FAST INSTANT DEATH when bag is full
+    CoinCollected.OnClientEvent:Connect(function(coin_type, current, max)
+        if coin_type == farmCoinType and current == max then
+            bag_full = true
+            task.spawn(function()
+                if Player.Character and Player.Character:FindFirstChild("HumanoidRootPart") then
+                    Player.Character:BreakJoints()
+                end
+            end)
+            repeat task.wait() until not Player.Character or not Player.Character:FindFirstChild("HumanoidRootPart")
+            bag_full = false
+        end
+    end)
+
+    RoundStart.OnClientEvent:Connect(function()
+        farming = true
+    end)
+
+    RoundEnd.OnClientEvent:Connect(function()
+        farming = false
+    end)
+
+    while task.wait() do
+        Character = Player.Character or Player.CharacterAdded:Wait()
+        HumanoidRootPart = Character:WaitForChild("HumanoidRootPart")
+
+        if autofarmEnabled and farming and not bag_full and Character and HumanoidRootPart then
+            local coin, distance = get_nearest_coin()
+            if coin then
+                if distance > 150 then
+                    HumanoidRootPart.CFrame = coin.CFrame
+                else
+                    local tween = tween_to(coin.CFrame, distance / currentSpeed)
+                    repeat task.wait() until not coin:FindFirstChild("TouchInterest") or not farming or not autofarmEnabled
+                    tween:Cancel()
+                end
+            end
+        end
+    end
+end)
