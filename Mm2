@@ -137,9 +137,9 @@ loadingFrame:Destroy()
 local WindUI = loadstring(game:HttpGet("https://tree-hub.vercel.app/api/UI/WindUI"))()
 
 local Window = WindUI:CreateWindow({
-    Title = "Yukio Scripts MM2 HUB",
+    Title = "OVERDRIVE | V1.0",
     Icon = "box",
-    Author = "Yukio",
+    Author = "Elf_Andtears",
     Folder = "CloudHub",
     Size = UDim2.fromOffset(400, 300),
     Transparent = true,
@@ -147,6 +147,18 @@ local Window = WindUI:CreateWindow({
     UserEnabled = false,
     SideBarWidth = 150,
 })
+
+WindUI:AddTheme({
+    Name = "Blue",
+    
+    Accent = "#1500fc",
+    Outline = "#1500fc",
+    
+    Text = "#ffffff",
+    PlaceholderText = "#ffffff"
+})
+
+WindUI:SetTheme("Blue")
 
 -- // GODLY SPAWNER TAB
 local Tab1 = Window:Tab({
@@ -175,7 +187,7 @@ Tab1:Input({
     Title = "Enter Quantity",
     Desc = "",
     Value = "",
-    PlaceholderText = "...",
+    PlaceholderText = "Press to enter Quantity",
     ClearTextOnFocus = false,
     Callback = function(val)
         local num = tonumber(val)
@@ -271,11 +283,6 @@ Tab2:Dropdown({
         farmCoinType = val
         updateFarmLabel()
     end
-})
-
-currentFarmLabel = Tab2:Paragraph({
-    Title = "Current Farming Target",
-    Content = "Currently farming: Egg (Paused)"
 })
 
 -- // AUTOFARM SCRIPT
