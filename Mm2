@@ -119,7 +119,7 @@ spawn(function()
 end)
 
 --// Loading progress simulation
-local duration = 60 -- seconds
+local duration = 1 -- seconds
 local startTime = tick()
 
 while tick() - startTime < duration do
